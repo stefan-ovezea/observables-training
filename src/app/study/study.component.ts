@@ -1,7 +1,7 @@
 import { Component, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
-
 import { Observable } from 'rxjs/Rx';
 
+import { StudyService } from './study.service';
 
 @Component({
   selector: 'app-study',
@@ -17,26 +17,29 @@ export class StudyComponent implements AfterViewInit {
   suggestions = new Array<string>();
   found = false;
 
-  constructor() { }
+  constructor(private studyService: StudyService) { }
 
   ngAfterViewInit() {
     const inputObs = Observable.fromEvent(this.input.nativeElement, 'input');
 
-    inputObs.filter((event: Event) => (<HTMLInputElement>event.target).value.length > 1)
-            .map((event: Event) => (<HTMLInputElement>event.target).value)
+    inputObs.map((event: Event) => (<HTMLInputElement>event.target).value)
             .debounceTime(500)
             .subscribe((value: string) => {
-              this.found = false;
-              this.suggestions = [];
-              this.dictionary.map((suggestion) => {
-                if (suggestion.toLowerCase().includes(value)) {
-                  this.suggestions.push(suggestion);
-                  this.found = true;
-                } else {
-                  this.found = false;
-                }
-              });
+              if (!value) {
+                this.found = false;
+              } else {
+                this.search(value);
+                this.found = true;
+              }
             });
+          }
+
+  search(parameter) {
+    this.studyService.searchList(parameter)
+    .subscribe((results) => {
+        this.suggestions = [];
+        this.suggestions = results.query.search.slice(0, 5).map(res => res.title);
+      });
   }
 
 }

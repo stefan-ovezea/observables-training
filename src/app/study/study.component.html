@@ -1,18 +1,20 @@
-<div class="container">
-  <h1>Observables Study</h1>
-  <br>
-  <div class="card">
-    <div class="col-md-6">
-      <div class="form-group">
-        <label>Reactive Search Input</label>
-        <input #input type="text" class="form-control">
-        <div>
-          <ul *ngIf="found" class="search-suggestion-box">
-            <li *ngFor="let suggestion of suggestions; let i = index"><span class="suggestion">Suggestion {{ i + 1 }}:</span>  {{ suggestion }} </li>
-          </ul>
+<div class="main-content">
+  <div class="container">
+    <h1>Observables Study</h1>
+    <br>
+    <div class="card">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label>Reactive Wikipedia Search</label>
+          <input #input type="text" class="form-control" [class.noSuggestions]="!found" placeholder="Enter your search here">
+          <div>
+            <ul *ngIf="found" class="search-suggestion-box">
+              <li *ngFor="let suggestion of suggestions">{{ suggestion }} </li>
+            </ul>
+          </div>
         </div>
+        <button disabled class="btn btn-primary">Search (Function Removed - Obsolete)</button>
       </div>
-      <button class="btn btn-primary">Search</button>
     </div>
   </div>
 </div>

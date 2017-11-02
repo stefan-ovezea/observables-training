@@ -1,5 +1,12 @@
+.main-content {
+    position: absolute;
+    top: 10rem;
+    left: 50%;
+    transform: translateX(-25%);
+}
+
 .col-md-6 {
-    padding: 5rem;
+    padding: 5rem;    
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 }
 
@@ -9,10 +16,14 @@
 }
 
 .form-control {
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    box-shadow: 0 0 8px 0 rgba(0,0,0,0.2);
     border: none;
     border-radius: 0;
     z-index: -1;
+}
+
+.noSuggestions {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 }
 
 h1 {
@@ -37,8 +48,7 @@ h1 {
 
 .search-suggestion-box > li:hover {
     text-align: left;
-    background-color: #337ab7;
-    color: #EEE;
+    background-color: #d4d4d4;
     cursor: default;
 }
 
